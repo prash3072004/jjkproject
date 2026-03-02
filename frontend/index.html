@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JJK — Domain Expansion</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --gojo-color: #00d4ff;
       --sukuna-color: #ff3a3a;
       --bg-dark: #090a0f;
       --bg-card: #0f1118;
-      --panel-border: rgba(255,255,255,0.07);
+      --panel-border: rgba(255, 255, 255, 0.07);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Rajdhani', sans-serif;
@@ -31,6 +41,7 @@
       position: relative;
       z-index: 10;
     }
+
     header h1 {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(1.4rem, 4vw, 2.6rem);
@@ -40,8 +51,9 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     header p {
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       font-size: 0.9rem;
       margin-top: 4px;
       letter-spacing: 0.15em;
@@ -55,6 +67,7 @@
       gap: 12px;
       padding: 16px 20px;
     }
+
     .tab-btn {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
@@ -63,25 +76,33 @@
       text-transform: uppercase;
       padding: 10px 28px;
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 6px;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       cursor: pointer;
       transition: all 0.25s;
     }
+
     .tab-btn.active {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.35);
       color: #fff;
     }
+
     .tab-btn:hover:not(.active) {
-      border-color: rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.8);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     /* ─── MAIN LAYOUT ─── */
-    .panel { display: none; padding: 0 20px 40px; }
-    .panel.active { display: block; }
+    .panel {
+      display: none;
+      padding: 0 20px 40px;
+    }
+
+    .panel.active {
+      display: block;
+    }
 
     /* ─── CAMERA SECTION ─── */
     .camera-wrap {
@@ -94,6 +115,7 @@
       background: #000;
       aspect-ratio: 4/3;
     }
+
     #video {
       width: 100%;
       height: 100%;
@@ -101,21 +123,27 @@
       display: block;
       transform: scaleX(-1);
     }
+
     #landmarkCanvas {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
     }
+
     .camera-hud {
       position: absolute;
-      top: 14px; left: 14px;
+      top: 14px;
+      left: 14px;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
+
     .hud-badge {
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(8px);
       border-radius: 6px;
       padding: 5px 12px;
@@ -124,27 +152,36 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    #statusBadge { color: #aaa; }
-    #gestureBadge { display: none; }
+
+    #statusBadge {
+      color: #aaa;
+    }
+
+    #gestureBadge {
+      display: none;
+    }
 
     /* ─── CONFIDENCE BAR ─── */
     .conf-bar-wrap {
       max-width: 680px;
       margin: 0 auto 20px;
     }
+
     .conf-label {
       font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
       margin-bottom: 6px;
     }
+
     .conf-bar-bg {
-      background: rgba(255,255,255,0.07);
+      background: rgba(255, 255, 255, 0.07);
       border-radius: 4px;
       height: 6px;
       overflow: hidden;
     }
+
     #confBar {
       height: 100%;
       width: 0%;
@@ -164,9 +201,20 @@
       justify-content: center;
       animation: fadeIn 0.4s ease;
     }
-    #revealOverlay.show { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    #revealOverlay.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
 
     .reveal-bg {
       position: absolute;
@@ -181,9 +229,17 @@
       text-align: center;
       animation: revealPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
     @keyframes revealPop {
-      0% { transform: scale(0.6) translateY(40px); opacity: 0; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
+      0% {
+        transform: scale(0.6) translateY(40px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
     }
 
     .reveal-title {
@@ -193,11 +249,12 @@
       margin-bottom: 8px;
       text-shadow: 0 0 40px var(--reveal-color, #fff), 0 0 80px var(--reveal-color, #fff);
     }
+
     .reveal-subtitle {
       font-size: clamp(0.9rem, 2vw, 1.4rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 32px;
     }
 
@@ -206,6 +263,7 @@
       display: inline-block;
       margin-bottom: 32px;
     }
+
     .reveal-img-glow {
       position: absolute;
       inset: -20px;
@@ -214,10 +272,21 @@
       opacity: 0.3;
       animation: pulse 1.5s ease-in-out infinite;
     }
+
     @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.08); }
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(1.08);
+      }
     }
+
     #revealImg {
       width: min(340px, 75vw);
       height: min(400px, 80vw);
@@ -236,15 +305,16 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       padding: 12px 36px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
       color: #fff;
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .reveal-close-btn:hover {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     /* ─── TRAINING PANEL ─── */
@@ -255,11 +325,16 @@
       grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
+
     @media (max-width: 640px) {
-      .train-layout { grid-template-columns: 1fr; }
+      .train-layout {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .train-camera-col { grid-column: 1 / -1; }
+    .train-camera-col {
+      grid-column: 1 / -1;
+    }
 
     .train-camera-wrap {
       position: relative;
@@ -270,6 +345,7 @@
       aspect-ratio: 4/3;
       max-height: 340px;
     }
+
     #trainVideo {
       width: 100%;
       height: 100%;
@@ -277,6 +353,7 @@
       display: block;
       transform: scaleX(-1);
     }
+
     #trainCanvas {
       position: absolute;
       inset: 0;
@@ -294,18 +371,29 @@
       flex-direction: column;
       gap: 14px;
     }
+
     .gesture-card h3 {
       font-family: 'Cinzel Decorative', serif;
       font-size: 1.1rem;
     }
-    .gesture-card.gojo-card h3 { color: var(--gojo-color); }
-    .gesture-card.sukuna-card h3 { color: var(--sukuna-color); }
+
+    .gesture-card.gojo-card h3 {
+      color: var(--gojo-color);
+    }
+
+    .gesture-card.sukuna-card h3 {
+      color: var(--sukuna-color);
+    }
 
     .sample-count {
       font-size: 2rem;
       font-weight: 700;
     }
-    .sample-count span { font-size: 0.9rem; color: rgba(255,255,255,0.4); }
+
+    .sample-count span {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
 
     .collect-btn {
       font-family: 'Rajdhani', sans-serif;
@@ -321,13 +409,21 @@
       position: relative;
       overflow: hidden;
     }
-    .collect-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .collect-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
 
     .gojo-btn {
       background: linear-gradient(135deg, #004a6e, #0099cc);
       color: #fff;
     }
-    .gojo-btn:hover:not(:disabled) { background: linear-gradient(135deg, #0066aa, #00d4ff); }
+
+    .gojo-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0066aa, #00d4ff);
+    }
+
     .gojo-btn.active-collect {
       background: linear-gradient(135deg, #0099cc, #00d4ff);
       animation: collectPulse 0.5s ease infinite alternate;
@@ -337,33 +433,55 @@
       background: linear-gradient(135deg, #6e0000, #cc0000);
       color: #fff;
     }
-    .sukuna-btn:hover:not(:disabled) { background: linear-gradient(135deg, #aa0000, #ff3a3a); }
+
+    .sukuna-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #aa0000, #ff3a3a);
+    }
+
     .sukuna-btn.active-collect {
       background: linear-gradient(135deg, #cc0000, #ff3a3a);
       animation: collectPulse 0.5s ease infinite alternate;
     }
 
     @keyframes collectPulse {
-      from { box-shadow: 0 0 10px currentColor; }
-      to { box-shadow: 0 0 30px currentColor; }
+      from {
+        box-shadow: 0 0 10px currentColor;
+      }
+
+      to {
+        box-shadow: 0 0 30px currentColor;
+      }
     }
 
-    .timer-wrap { display: none; }
-    .timer-wrap.show { display: block; }
+    .timer-wrap {
+      display: none;
+    }
+
+    .timer-wrap.show {
+      display: block;
+    }
+
     .timer-bar-bg {
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 4px;
       height: 6px;
       overflow: hidden;
     }
+
     .timer-bar {
       height: 100%;
       width: 100%;
       border-radius: 4px;
       transition: width 0.1s linear;
     }
-    .gojo-timer { background: var(--gojo-color); }
-    .sukuna-timer { background: var(--sukuna-color); }
+
+    .gojo-timer {
+      background: var(--gojo-color);
+    }
+
+    .sukuna-timer {
+      background: var(--sukuna-color);
+    }
 
     .train-actions {
       grid-column: 1 / -1;
@@ -372,6 +490,7 @@
       justify-content: center;
       flex-wrap: wrap;
     }
+
     .train-main-btn {
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
@@ -384,28 +503,47 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     #trainBtn {
       background: linear-gradient(135deg, #2d2d2d, #4a4a4a);
       color: #fff;
     }
-    #trainBtn:hover { background: linear-gradient(135deg, #444, #666); }
-    #trainBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    #trainBtn:hover {
+      background: linear-gradient(135deg, #444, #666);
+    }
+
+    #trainBtn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
     #resetBtn {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.5);
     }
-    #resetBtn:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+
+    #resetBtn:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #fff;
+    }
 
     .train-status-msg {
       grid-column: 1 / -1;
       text-align: center;
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
       min-height: 22px;
     }
-    .train-status-msg.success { color: #4dff91; }
-    .train-status-msg.error { color: #ff6b6b; }
+
+    .train-status-msg.success {
+      color: #4dff91;
+    }
+
+    .train-status-msg.error {
+      color: #ff6b6b;
+    }
 
     /* ─── DETECT PANEL extras ─── */
     .detect-info {
@@ -415,6 +553,7 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
     .detect-info-card {
       flex: 1;
       min-width: 120px;
@@ -424,650 +563,701 @@
       padding: 14px 16px;
       text-align: center;
     }
+
     .detect-info-card .di-label {
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       margin-bottom: 4px;
     }
+
     .detect-info-card .di-val {
       font-size: 1.1rem;
       font-weight: 700;
     }
-    #modelStatusVal { color: #4dff91; }
-    #modelStatusVal.untrained { color: #ff6b6b; }
-    #currentGestureVal { color: #fff; }
+
+    #modelStatusVal {
+      color: #4dff91;
+    }
+
+    #modelStatusVal.untrained {
+      color: #ff6b6b;
+    }
+
+    #currentGestureVal {
+      color: #fff;
+    }
 
     /* ─── PARTICLES (decorative) ─── */
-    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
     .particle {
       position: absolute;
       border-radius: 50%;
       opacity: 0;
       animation: floatUp linear infinite;
     }
+
     @keyframes floatUp {
-      0% { opacity: 0; transform: translateY(0) scale(1); }
-      10% { opacity: 1; }
-      90% { opacity: 0.6; }
-      100% { opacity: 0; transform: translateY(-120vh) scale(0.2); }
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(1);
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.6;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-120vh) scale(0.2);
+      }
     }
 
     /* ─── SCROLLBAR ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #111; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 3px;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- Decorative particles -->
-<div class="particles" id="particles"></div>
+  <!-- Decorative particles -->
+  <div class="particles" id="particles"></div>
 
-<!-- Reveal overlay -->
-<div id="revealOverlay">
-  <div class="reveal-bg" id="revealBg"></div>
-  <div class="reveal-content">
-    <div class="reveal-title" id="revealTitle">DOMAIN EXPANSION</div>
-    <div class="reveal-subtitle" id="revealSubtitle"></div>
-    <div class="reveal-img-wrap">
-      <div class="reveal-img-glow"></div>
-      <img id="revealImg" src="" alt="Character"/>
-    </div>
-    <button class="reveal-close-btn" onclick="closeReveal()">✕ Dismiss</button>
-  </div>
-</div>
-
-<header>
-  <h1>Domain Expansion</h1>
-  <p>Jujutsu Kaisen — Gesture Recognition</p>
-</header>
-
-<nav class="tabs">
-  <button class="tab-btn active" id="tabDetect" onclick="switchTab('detect')">⚡ Detect</button>
-  <button class="tab-btn" id="tabTrain" onclick="switchTab('train')">✋ Train Gestures</button>
-</nav>
-
-<!-- ═══════ DETECT PANEL ═══════ -->
-<div class="panel active" id="detectPanel">
-
-  <div class="detect-info">
-    <div class="detect-info-card">
-      <div class="di-label">Model</div>
-      <div class="di-val" id="modelStatusVal">Checking…</div>
-    </div>
-    <div class="detect-info-card">
-      <div class="di-label">Detected</div>
-      <div class="di-val" id="currentGestureVal">—</div>
-    </div>
-    <div class="detect-info-card">
-      <div class="di-label">Confidence</div>
-      <div class="di-val" id="confPct">—</div>
+  <!-- Reveal overlay -->
+  <div id="revealOverlay">
+    <div class="reveal-bg" id="revealBg"></div>
+    <div class="reveal-content">
+      <div class="reveal-title" id="revealTitle">DOMAIN EXPANSION</div>
+      <div class="reveal-subtitle" id="revealSubtitle"></div>
+      <div class="reveal-img-wrap">
+        <div class="reveal-img-glow"></div>
+        <img id="revealImg" src="" alt="Character" />
+      </div>
+      <button class="reveal-close-btn" onclick="closeReveal()">✕ Dismiss</button>
     </div>
   </div>
 
-  <div class="camera-wrap">
-    <video id="video" autoplay muted playsinline></video>
-    <canvas id="landmarkCanvas"></canvas>
-    <div class="camera-hud">
-      <div class="hud-badge" id="statusBadge">Starting camera…</div>
-      <div class="hud-badge" id="gestureBadge"></div>
-    </div>
-  </div>
+  <header>
+    <h1>Domain Expansion</h1>
+    <p>Jujutsu Kaisen — Gesture Recognition</p>
+  </header>
 
-  <div class="conf-bar-wrap">
-    <div class="conf-label">Gesture Confidence</div>
-    <div class="conf-bar-bg"><div id="confBar"></div></div>
-  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" id="tabDetect" onclick="switchTab('detect')">⚡ Detect</button>
+    <button class="tab-btn" id="tabTrain" onclick="switchTab('train')">✋ Train Gestures</button>
+  </nav>
 
-</div>
+  <!-- ═══════ DETECT PANEL ═══════ -->
+  <div class="panel active" id="detectPanel">
 
-<!-- ═══════ TRAIN PANEL ═══════ -->
-<div class="panel" id="trainPanel">
-  <div class="train-layout">
-
-    <div class="train-camera-col">
-      <div class="train-camera-wrap">
-        <video id="trainVideo" autoplay muted playsinline></video>
-        <canvas id="trainCanvas"></canvas>
+    <div class="detect-info">
+      <div class="detect-info-card">
+        <div class="di-label">Model</div>
+        <div class="di-val" id="modelStatusVal">Checking…</div>
+      </div>
+      <div class="detect-info-card">
+        <div class="di-label">Detected</div>
+        <div class="di-val" id="currentGestureVal">—</div>
+      </div>
+      <div class="detect-info-card">
+        <div class="di-label">Confidence</div>
+        <div class="di-val" id="confPct">—</div>
       </div>
     </div>
 
-    <!-- Gojo Card -->
-    <div class="gesture-card gojo-card">
-      <h3>☁ Gojo Satoru</h3>
-      <div>
-        <div class="sample-count" id="gojoCount">0 <span>samples</span></div>
-        <div style="font-size:0.82rem; color:rgba(255,255,255,0.35); margin-top:2px;">∞ Infinity Domain</div>
+    <div class="camera-wrap">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="landmarkCanvas"></canvas>
+      <div class="camera-hud">
+        <div class="hud-badge" id="statusBadge">Starting camera…</div>
+        <div class="hud-badge" id="gestureBadge"></div>
       </div>
-      <div>
-        <div style="font-size:0.8rem; color:rgba(255,255,255,0.4); margin-bottom:8px;">
-          Hold your Gojo gesture steady, then click Record (3 sec)
+    </div>
+
+    <div class="conf-bar-wrap">
+      <div class="conf-label">Gesture Confidence</div>
+      <div class="conf-bar-bg">
+        <div id="confBar"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════ TRAIN PANEL ═══════ -->
+  <div class="panel" id="trainPanel">
+    <div class="train-layout">
+
+      <div class="train-camera-col">
+        <div class="train-camera-wrap">
+          <video id="trainVideo" autoplay muted playsinline></video>
+          <canvas id="trainCanvas"></canvas>
         </div>
-        <button class="collect-btn gojo-btn" id="gojoCollectBtn" onclick="startCollect('gojo')">
-          ● Record Gojo
+      </div>
+
+      <!-- Gojo Card -->
+      <div class="gesture-card gojo-card">
+        <h3>☁ Gojo Satoru</h3>
+        <div>
+          <div class="sample-count" id="gojoCount">0 <span>samples</span></div>
+          <div style="font-size:0.82rem; color:rgba(255,255,255,0.35); margin-top:2px;">∞ Infinity Domain</div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.4); margin-bottom:8px;">
+            Hold your Gojo gesture steady, then click Record (3 sec)
+          </div>
+          <button class="collect-btn gojo-btn" id="gojoCollectBtn" onclick="startCollect('gojo')">
+            ● Record Gojo
+          </button>
+        </div>
+        <div class="timer-wrap" id="gojoTimer">
+          <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;" id="gojoTimerLabel">Recording…
+          </div>
+          <div class="timer-bar-bg">
+            <div class="timer-bar gojo-timer" id="gojoTimerBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sukuna Card -->
+      <div class="gesture-card sukuna-card">
+        <h3>🔥 Ryomen Sukuna</h3>
+        <div>
+          <div class="sample-count" id="sukunaCount">0 <span>samples</span></div>
+          <div style="font-size:0.82rem; color:rgba(255,255,255,0.35); margin-top:2px;">Malevolent Shrine</div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.4); margin-bottom:8px;">
+            Hold your Sukuna gesture steady, then click Record (3 sec)
+          </div>
+          <button class="collect-btn sukuna-btn" id="sukunaCollectBtn" onclick="startCollect('sukuna')">
+            ● Record Sukuna
+          </button>
+        </div>
+        <div class="timer-wrap" id="sukunaTimer">
+          <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;" id="sukunaTimerLabel">
+            Recording…</div>
+          <div class="timer-bar-bg">
+            <div class="timer-bar sukuna-timer" id="sukunaTimerBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="train-actions">
+        <button class="train-main-btn" id="trainBtn" onclick="trainModel()" disabled>
+          ⚡ Train Model
+        </button>
+        <button class="train-main-btn" id="resetBtn" onclick="resetData()">
+          ↺ Reset Data
         </button>
       </div>
-      <div class="timer-wrap" id="gojoTimer">
-        <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;" id="gojoTimerLabel">Recording…</div>
-        <div class="timer-bar-bg"><div class="timer-bar gojo-timer" id="gojoTimerBar"></div></div>
-      </div>
+
+      <div class="train-status-msg" id="trainStatusMsg"></div>
+
     </div>
-
-    <!-- Sukuna Card -->
-    <div class="gesture-card sukuna-card">
-      <h3>🔥 Ryomen Sukuna</h3>
-      <div>
-        <div class="sample-count" id="sukunaCount">0 <span>samples</span></div>
-        <div style="font-size:0.82rem; color:rgba(255,255,255,0.35); margin-top:2px;">Malevolent Shrine</div>
-      </div>
-      <div>
-        <div style="font-size:0.8rem; color:rgba(255,255,255,0.4); margin-bottom:8px;">
-          Hold your Sukuna gesture steady, then click Record (3 sec)
-        </div>
-        <button class="collect-btn sukuna-btn" id="sukunaCollectBtn" onclick="startCollect('sukuna')">
-          ● Record Sukuna
-        </button>
-      </div>
-      <div class="timer-wrap" id="sukunaTimer">
-        <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;" id="sukunaTimerLabel">Recording…</div>
-        <div class="timer-bar-bg"><div class="timer-bar sukuna-timer" id="sukunaTimerBar"></div></div>
-      </div>
-    </div>
-
-    <div class="train-actions">
-      <button class="train-main-btn" id="trainBtn" onclick="trainModel()" disabled>
-        ⚡ Train Model
-      </button>
-      <button class="train-main-btn" id="resetBtn" onclick="resetData()">
-        ↺ Reset Data
-      </button>
-    </div>
-
-    <div class="train-status-msg" id="trainStatusMsg"></div>
-
   </div>
-</div>
 
-<!-- Hidden audio elements -->
-<audio id="gojoAudio" src="gojo sound.mp3" preload="auto"></audio>
-<audio id="sukunaAudio" src="sukuna sound.m4a" preload="auto"></audio>
+  <!-- Hidden audio elements -->
+  <audio id="gojoAudio" src="gojo sound.mp3" preload="auto"></audio>
+  <audio id="sukunaAudio" src="sukuna sound.m4a" preload="auto"></audio>
 
-<script>
-// ─────────────────────────────────────────────
-//  CONFIG
-// ─────────────────────────────────────────────
-const WS_BASE = 'ws://localhost:8000';
-const API_BASE = 'http://localhost:8000';
-const COLLECT_DURATION_MS = 3000;
-const CONFIRM_HOLD_MS = 1000; // hold gesture this long before triggering reveal
-const REVEAL_COOLDOWN_MS = 4000; // wait between reveals
-const FRAME_INTERVAL_MS = 80; // ~12fps to server
+  <script>
+    // ─────────────────────────────────────────────
+    //  CONFIG
+    // ─────────────────────────────────────────────
+    const WS_BASE = 'wss://jjk-backend-x996.onrender.com';
+    const API_BASE = 'https://jjk-backend-x996.onrender.com';
+    const COLLECT_DURATION_MS = 3000;
+    const CONFIRM_HOLD_MS = 1000; // hold gesture this long before triggering reveal
+    const REVEAL_COOLDOWN_MS = 4000; // wait between reveals
+    const FRAME_INTERVAL_MS = 80; // ~12fps to server
 
-// ─────────────────────────────────────────────
-//  PARTICLES
-// ─────────────────────────────────────────────
-(function createParticles() {
-  const container = document.getElementById('particles');
-  const colors = ['#00d4ff22', '#ff3a3a22', '#ffffff11', '#a855f722'];
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = 2 + Math.random() * 4;
-    p.style.cssText = `
+    // ─────────────────────────────────────────────
+    //  PARTICLES
+    // ─────────────────────────────────────────────
+    (function createParticles() {
+      const container = document.getElementById('particles');
+      const colors = ['#00d4ff22', '#ff3a3a22', '#ffffff11', '#a855f722'];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 2 + Math.random() * 4;
+        p.style.cssText = `
       width:${size}px; height:${size}px;
-      left:${Math.random()*100}%;
-      bottom:${-10 - Math.random()*20}%;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation-duration:${8 + Math.random()*14}s;
-      animation-delay:${Math.random()*10}s;
+      left:${Math.random() * 100}%;
+      bottom:${-10 - Math.random() * 20}%;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration:${8 + Math.random() * 14}s;
+      animation-delay:${Math.random() * 10}s;
     `;
-    container.appendChild(p);
-  }
-})();
-
-// ─────────────────────────────────────────────
-//  STATE
-// ─────────────────────────────────────────────
-let detectWs = null;
-let collectWs = null;
-let detectStream = null;
-let trainStream = null;
-let detectInterval = null;
-let currentTab = 'detect';
-let revealCooldown = false;
-let gestureHoldTimer = null;
-let lastGesture = 'none';
-let gestureHoldStart = null;
-
-// ─────────────────────────────────────────────
-//  TAB SWITCHING
-// ─────────────────────────────────────────────
-function switchTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(`tab${tab.charAt(0).toUpperCase()+tab.slice(1)}`).classList.add('active');
-  document.getElementById(`${tab}Panel`).classList.add('active');
-
-  if (tab === 'detect') {
-    startDetectCamera();
-    stopTrainCamera();
-  } else {
-    startTrainCamera();
-    stopDetectCamera();
-  }
-}
-
-// ─────────────────────────────────────────────
-//  DETECT CAMERA
-// ─────────────────────────────────────────────
-async function startDetectCamera() {
-  if (detectStream) return;
-  try {
-    detectStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, facingMode: 'user' } });
-    const video = document.getElementById('video');
-    video.srcObject = detectStream;
-    await video.play();
-    document.getElementById('statusBadge').textContent = 'Camera ready';
-    checkModelStatus();
-    connectDetectWs();
-  } catch (e) {
-    document.getElementById('statusBadge').textContent = 'Camera denied';
-    console.error(e);
-  }
-}
-
-function stopDetectCamera() {
-  if (detectInterval) { clearInterval(detectInterval); detectInterval = null; }
-  if (detectWs) { detectWs.close(); detectWs = null; }
-  if (detectStream) { detectStream.getTracks().forEach(t => t.stop()); detectStream = null; }
-}
-
-async function checkModelStatus() {
-  try {
-    const res = await fetch(`${API_BASE}/model-status`);
-    const data = await res.json();
-    const el = document.getElementById('modelStatusVal');
-    if (data.trained) {
-      el.textContent = 'Ready ✓';
-      el.className = 'di-val';
-      el.style.color = '#4dff91';
-    } else {
-      el.textContent = 'Not Trained';
-      el.className = 'di-val untrained';
-      el.style.color = '#ff6b6b';
-    }
-  } catch {
-    const el = document.getElementById('modelStatusVal');
-    el.textContent = 'Server offline';
-    el.style.color = '#ff6b6b';
-  }
-}
-
-// ─────────────────────────────────────────────
-//  DETECT WEBSOCKET
-// ─────────────────────────────────────────────
-function connectDetectWs() {
-  detectWs = new WebSocket(`${WS_BASE}/ws/detect`);
-  detectWs.onopen = () => {
-    document.getElementById('statusBadge').textContent = '● Live';
-    startSendingFrames();
-  };
-  detectWs.onmessage = (e) => handleDetectResult(JSON.parse(e.data));
-  detectWs.onerror = () => { document.getElementById('statusBadge').textContent = 'Server offline'; };
-  detectWs.onclose = () => { document.getElementById('statusBadge').textContent = 'Disconnected'; };
-}
-
-function startSendingFrames() {
-  const video = document.getElementById('video');
-  const canvas = document.createElement('canvas');
-  canvas.width = 320; canvas.height = 240;
-  const ctx = canvas.getContext('2d');
-
-  detectInterval = setInterval(() => {
-    if (!detectWs || detectWs.readyState !== WebSocket.OPEN) return;
-    ctx.drawImage(video, 0, 0, 320, 240);
-    const b64 = canvas.toDataURL('image/jpeg', 0.6);
-    detectWs.send(JSON.stringify({ frame: b64 }));
-  }, FRAME_INTERVAL_MS);
-}
-
-// ─────────────────────────────────────────────
-//  DRAW LANDMARKS
-// ─────────────────────────────────────────────
-const HAND_CONNECTIONS = [
-  [0,1],[1,2],[2,3],[3,4],
-  [0,5],[5,6],[6,7],[7,8],
-  [0,9],[9,10],[10,11],[11,12],
-  [0,13],[13,14],[14,15],[15,16],
-  [0,17],[17,18],[18,19],[19,20],
-  [5,9],[9,13],[13,17]
-];
-
-function drawLandmarks(canvas, landmarks, color) {
-  const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (!landmarks || landmarks.length === 0) return;
-
-  // Draw connections
-  ctx.strokeStyle = color + '88';
-  ctx.lineWidth = 2;
-  HAND_CONNECTIONS.forEach(([a, b]) => {
-    if (landmarks[a] && landmarks[b]) {
-      ctx.beginPath();
-      // mirror for display (video is flipped)
-      ctx.moveTo((1 - landmarks[a].x) * canvas.width, landmarks[a].y * canvas.height);
-      ctx.lineTo((1 - landmarks[b].x) * canvas.width, landmarks[b].y * canvas.height);
-      ctx.stroke();
-    }
-  });
-
-  // Draw points
-  landmarks.forEach((lm, i) => {
-    const x = (1 - lm.x) * canvas.width;
-    const y = lm.y * canvas.height;
-    ctx.beginPath();
-    ctx.arc(x, y, i === 0 ? 5 : 3, 0, Math.PI * 2);
-    ctx.fillStyle = i === 0 ? '#fff' : color;
-    ctx.fill();
-  });
-}
-
-// ─────────────────────────────────────────────
-//  HANDLE DETECT RESULT
-// ─────────────────────────────────────────────
-function handleDetectResult(data) {
-  const { gesture, confidence, landmarks } = data;
-
-  // Draw landmarks
-  const canvas = document.getElementById('landmarkCanvas');
-  const lmColor = gesture === 'gojo' ? '#00d4ff' : gesture === 'sukuna' ? '#ff3a3a' : '#ffffff';
-  drawLandmarks(canvas, landmarks, lmColor);
-
-  // Update confidence bar
-  const confPct = Math.round(confidence * 100);
-  const confBar = document.getElementById('confBar');
-  confBar.style.width = confPct + '%';
-  document.getElementById('confPct').textContent = confPct + '%';
-
-  if (gesture === 'gojo') {
-    confBar.style.background = 'linear-gradient(90deg, #0066aa, #00d4ff)';
-  } else if (gesture === 'sukuna') {
-    confBar.style.background = 'linear-gradient(90deg, #880000, #ff3a3a)';
-  } else {
-    confBar.style.background = 'linear-gradient(90deg, #444, #888)';
-  }
-
-  // Update info cards
-  const gestureEl = document.getElementById('currentGestureVal');
-  if (gesture === 'gojo') {
-    gestureEl.textContent = '☁ Gojo';
-    gestureEl.style.color = '#00d4ff';
-  } else if (gesture === 'sukuna') {
-    gestureEl.textContent = '🔥 Sukuna';
-    gestureEl.style.color = '#ff3a3a';
-  } else {
-    gestureEl.textContent = '—';
-    gestureEl.style.color = '#fff';
-  }
-
-  // HUD badge
-  const badge = document.getElementById('gestureBadge');
-  if (gesture !== 'none') {
-    badge.style.display = 'block';
-    badge.textContent = gesture === 'gojo' ? '☁ GOJO DETECTED' : '🔥 SUKUNA DETECTED';
-    badge.style.color = gesture === 'gojo' ? '#00d4ff' : '#ff3a3a';
-  } else {
-    badge.style.display = 'none';
-  }
-
-  // Gesture hold logic
-  if (!revealCooldown) {
-    if (gesture !== 'none' && gesture === lastGesture) {
-      if (!gestureHoldStart) gestureHoldStart = Date.now();
-      const heldMs = Date.now() - gestureHoldStart;
-      if (heldMs >= CONFIRM_HOLD_MS) {
-        triggerReveal(gesture);
-        revealCooldown = true;
-        setTimeout(() => { revealCooldown = false; }, REVEAL_COOLDOWN_MS);
-        gestureHoldStart = null;
-        lastGesture = 'none';
+        container.appendChild(p);
       }
-    } else {
-      lastGesture = gesture;
-      gestureHoldStart = gesture !== 'none' ? Date.now() : null;
+    })();
+
+    // ─────────────────────────────────────────────
+    //  STATE
+    // ─────────────────────────────────────────────
+    let detectWs = null;
+    let collectWs = null;
+    let detectStream = null;
+    let trainStream = null;
+    let detectInterval = null;
+    let currentTab = 'detect';
+    let revealCooldown = false;
+    let gestureHoldTimer = null;
+    let lastGesture = 'none';
+    let gestureHoldStart = null;
+
+    // ─────────────────────────────────────────────
+    //  TAB SWITCHING
+    // ─────────────────────────────────────────────
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
+      document.getElementById(`${tab}Panel`).classList.add('active');
+
+      if (tab === 'detect') {
+        startDetectCamera();
+        stopTrainCamera();
+      } else {
+        startTrainCamera();
+        stopDetectCamera();
+      }
     }
-  }
-}
 
-// ─────────────────────────────────────────────
-//  REVEAL
-// ─────────────────────────────────────────────
-function triggerReveal(character) {
-  const overlay = document.getElementById('revealOverlay');
-  const revealBg = document.getElementById('revealBg');
-  const revealTitle = document.getElementById('revealTitle');
-  const revealSubtitle = document.getElementById('revealSubtitle');
-  const revealImg = document.getElementById('revealImg');
-
-  if (character === 'gojo') {
-    document.documentElement.style.setProperty('--reveal-color', '#00d4ff');
-    revealBg.style.background = 'radial-gradient(ellipse at center, #001a2e 0%, #000 70%)';
-    revealTitle.textContent = 'Unlimited Void';
-    revealTitle.style.color = '#00d4ff';
-    revealSubtitle.textContent = '無量空処 — Infinite Void Domain Expansion';
-    revealImg.src = 'gojo.png';
-    revealImg.style.borderColor = '#00d4ff';
-    revealImg.style.boxShadow = '0 0 60px #00d4ff, 0 0 120px #0066aa';
-
-    const audio = document.getElementById('gojoAudio');
-    audio.currentTime = 0;
-    audio.play().catch(()=>{});
-
-  } else if (character === 'sukuna') {
-    document.documentElement.style.setProperty('--reveal-color', '#ff3a3a');
-    revealBg.style.background = 'radial-gradient(ellipse at center, #1a0000 0%, #000 70%)';
-    revealTitle.textContent = 'Malevolent Shrine';
-    revealTitle.style.color = '#ff3a3a';
-    revealSubtitle.textContent = '伏魔御廚子 — Malevolent Shrine Domain Expansion';
-    revealImg.src = 'sukuna.jpg';
-    revealImg.style.borderColor = '#ff3a3a';
-    revealImg.style.boxShadow = '0 0 60px #ff3a3a, 0 0 120px #880000';
-
-    const audio = document.getElementById('sukunaAudio');
-    audio.currentTime = 0;
-    audio.play().catch(()=>{});
-  }
-
-  overlay.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeReveal() {
-  document.getElementById('revealOverlay').classList.remove('show');
-  document.body.style.overflow = '';
-  document.getElementById('gojoAudio').pause();
-  document.getElementById('sukunaAudio').pause();
-}
-
-// Close on bg click
-document.getElementById('revealBg').addEventListener('click', closeReveal);
-
-// ─────────────────────────────────────────────
-//  TRAIN CAMERA
-// ─────────────────────────────────────────────
-async function startTrainCamera() {
-  if (trainStream) return;
-  try {
-    trainStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, facingMode: 'user' } });
-    const video = document.getElementById('trainVideo');
-    video.srcObject = trainStream;
-    await video.play();
-    connectCollectWs();
-  } catch (e) {
-    console.error('Train camera error:', e);
-  }
-}
-
-function stopTrainCamera() {
-  if (collectWs) { collectWs.close(); collectWs = null; }
-  if (trainStream) { trainStream.getTracks().forEach(t => t.stop()); trainStream = null; }
-}
-
-// ─────────────────────────────────────────────
-//  COLLECT WEBSOCKET
-// ─────────────────────────────────────────────
-let collectInterval = null;
-let isCollecting = false;
-let collectingGesture = null;
-
-function connectCollectWs() {
-  collectWs = new WebSocket(`${WS_BASE}/ws/collect`);
-  collectWs.onopen = () => startSendingTrainFrames();
-  collectWs.onmessage = (e) => handleCollectResult(JSON.parse(e.data));
-  collectWs.onerror = (e) => console.error('Collect WS error', e);
-}
-
-function startSendingTrainFrames() {
-  const video = document.getElementById('trainVideo');
-  const canvas = document.createElement('canvas');
-  canvas.width = 320; canvas.height = 240;
-  const ctx = canvas.getContext('2d');
-
-  collectInterval = setInterval(() => {
-    if (!collectWs || collectWs.readyState !== WebSocket.OPEN) return;
-    ctx.drawImage(video, 0, 0, 320, 240);
-    const b64 = canvas.toDataURL('image/jpeg', 0.6);
-    collectWs.send(JSON.stringify({
-      frame: b64,
-      gesture: collectingGesture || '',
-      collecting: isCollecting
-    }));
-  }, FRAME_INTERVAL_MS);
-}
-
-function handleCollectResult(data) {
-  if (data.status) return; // training/reset responses handled elsewhere
-
-  const { counts, landmarks, hand_detected } = data;
-
-  // Update counts
-  if (counts) {
-    const gc = counts.gojo || 0;
-    const sc = counts.sukuna || 0;
-    document.getElementById('gojoCount').innerHTML = `${gc} <span>samples</span>`;
-    document.getElementById('sukunaCount').innerHTML = `${sc} <span>samples</span>`;
-
-    // Enable train button if enough samples
-    document.getElementById('trainBtn').disabled = gc < 10 || sc < 10;
-  }
-
-  // Draw landmarks on train canvas
-  if (landmarks) {
-    const canvas = document.getElementById('trainCanvas');
-    const lmColor = collectingGesture === 'gojo' ? '#00d4ff' : collectingGesture === 'sukuna' ? '#ff3a3a' : '#ffffff';
-    drawLandmarks(canvas, landmarks, lmColor);
-  }
-}
-
-// ─────────────────────────────────────────────
-//  GESTURE COLLECTION TIMING
-// ─────────────────────────────────────────────
-function startCollect(gestureLabel) {
-  if (isCollecting) return;
-  isCollecting = true;
-  collectingGesture = gestureLabel;
-
-  const timerWrap = document.getElementById(`${gestureLabel}Timer`);
-  const timerBar = document.getElementById(`${gestureLabel}TimerBar`);
-  const timerLabel = document.getElementById(`${gestureLabel}TimerLabel`);
-  const btn = document.getElementById(`${gestureLabel}CollectBtn`);
-
-  btn.disabled = true;
-  btn.classList.add('active-collect');
-  timerWrap.classList.add('show');
-  timerBar.style.width = '100%';
-
-  const start = Date.now();
-  const tick = setInterval(() => {
-    const elapsed = Date.now() - start;
-    const pct = Math.max(0, 100 - (elapsed / COLLECT_DURATION_MS) * 100);
-    timerBar.style.width = pct + '%';
-    timerLabel.textContent = `Recording… ${((COLLECT_DURATION_MS - elapsed) / 1000).toFixed(1)}s`;
-
-    if (elapsed >= COLLECT_DURATION_MS) {
-      clearInterval(tick);
-      isCollecting = false;
-      collectingGesture = null;
-      btn.disabled = false;
-      btn.classList.remove('active-collect');
-      timerWrap.classList.remove('show');
+    // ─────────────────────────────────────────────
+    //  DETECT CAMERA
+    // ─────────────────────────────────────────────
+    async function startDetectCamera() {
+      if (detectStream) return;
+      try {
+        detectStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, facingMode: 'user' } });
+        const video = document.getElementById('video');
+        video.srcObject = detectStream;
+        await video.play();
+        document.getElementById('statusBadge').textContent = 'Camera ready';
+        checkModelStatus();
+        connectDetectWs();
+      } catch (e) {
+        document.getElementById('statusBadge').textContent = 'Camera denied';
+        console.error(e);
+      }
     }
-  }, 50);
-}
 
-// ─────────────────────────────────────────────
-//  TRAIN MODEL
-// ─────────────────────────────────────────────
-function trainModel() {
-  if (!collectWs || collectWs.readyState !== WebSocket.OPEN) {
-    setTrainStatus('Server not connected. Start the backend first.', 'error');
-    return;
-  }
-  const btn = document.getElementById('trainBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Training…';
-  setTrainStatus('Training model on your gestures…', '');
-
-  collectWs.send(JSON.stringify({ action: 'train' }));
-
-  collectWs.onmessage = (e) => {
-    const data = JSON.parse(e.data);
-    if (data.status === 'trained') {
-      const acc = Math.round((data.accuracy || 0) * 100);
-      setTrainStatus(`✓ Model trained! Accuracy: ${acc}% — Switch to Detect tab to use it.`, 'success');
-      btn.textContent = '✓ Trained!';
-      checkModelStatus();
-    } else if (data.status === 'error') {
-      setTrainStatus('Error: ' + data.message, 'error');
-      btn.textContent = '⚡ Train Model';
-      btn.disabled = false;
-    } else {
-      handleCollectResult(data);
+    function stopDetectCamera() {
+      if (detectInterval) { clearInterval(detectInterval); detectInterval = null; }
+      if (detectWs) { detectWs.close(); detectWs = null; }
+      if (detectStream) { detectStream.getTracks().forEach(t => t.stop()); detectStream = null; }
     }
-  };
-}
 
-function resetData() {
-  if (!collectWs || collectWs.readyState !== WebSocket.OPEN) return;
-  collectWs.send(JSON.stringify({ action: 'reset' }));
-  document.getElementById('gojoCount').innerHTML = '0 <span>samples</span>';
-  document.getElementById('sukunaCount').innerHTML = '0 <span>samples</span>';
-  document.getElementById('trainBtn').disabled = true;
-  document.getElementById('trainBtn').textContent = '⚡ Train Model';
-  setTrainStatus('', '');
+    async function checkModelStatus() {
+      try {
+        const res = await fetch(`${API_BASE}/model-status`);
+        const data = await res.json();
+        const el = document.getElementById('modelStatusVal');
+        if (data.trained) {
+          el.textContent = 'Ready ✓';
+          el.className = 'di-val';
+          el.style.color = '#4dff91';
+        } else {
+          el.textContent = 'Not Trained';
+          el.className = 'di-val untrained';
+          el.style.color = '#ff6b6b';
+        }
+      } catch {
+        const el = document.getElementById('modelStatusVal');
+        el.textContent = 'Server offline';
+        el.style.color = '#ff6b6b';
+      }
+    }
 
-  // Restore normal message handler
-  collectWs.onmessage = (e) => handleCollectResult(JSON.parse(e.data));
-}
+    // ─────────────────────────────────────────────
+    //  DETECT WEBSOCKET
+    // ─────────────────────────────────────────────
+    function connectDetectWs() {
+      detectWs = new WebSocket(`${WS_BASE}/ws/detect`);
+      detectWs.onopen = () => {
+        document.getElementById('statusBadge').textContent = '● Live';
+        startSendingFrames();
+      };
+      detectWs.onmessage = (e) => handleDetectResult(JSON.parse(e.data));
+      detectWs.onerror = () => { document.getElementById('statusBadge').textContent = 'Server offline'; };
+      detectWs.onclose = () => { document.getElementById('statusBadge').textContent = 'Disconnected'; };
+    }
 
-function setTrainStatus(msg, type) {
-  const el = document.getElementById('trainStatusMsg');
-  el.textContent = msg;
-  el.className = 'train-status-msg' + (type ? ' ' + type : '');
-}
+    function startSendingFrames() {
+      const video = document.getElementById('video');
+      const canvas = document.createElement('canvas');
+      canvas.width = 320; canvas.height = 240;
+      const ctx = canvas.getContext('2d');
 
-// ─────────────────────────────────────────────
-//  BOOT
-// ─────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  startDetectCamera();
-});
-</script>
+      detectInterval = setInterval(() => {
+        if (!detectWs || detectWs.readyState !== WebSocket.OPEN) return;
+        ctx.drawImage(video, 0, 0, 320, 240);
+        const b64 = canvas.toDataURL('image/jpeg', 0.6);
+        detectWs.send(JSON.stringify({ frame: b64 }));
+      }, FRAME_INTERVAL_MS);
+    }
+
+    // ─────────────────────────────────────────────
+    //  DRAW LANDMARKS
+    // ─────────────────────────────────────────────
+    const HAND_CONNECTIONS = [
+      [0, 1], [1, 2], [2, 3], [3, 4],
+      [0, 5], [5, 6], [6, 7], [7, 8],
+      [0, 9], [9, 10], [10, 11], [11, 12],
+      [0, 13], [13, 14], [14, 15], [15, 16],
+      [0, 17], [17, 18], [18, 19], [19, 20],
+      [5, 9], [9, 13], [13, 17]
+    ];
+
+    function drawLandmarks(canvas, landmarks, color) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!landmarks || landmarks.length === 0) return;
+
+      // Draw connections
+      ctx.strokeStyle = color + '88';
+      ctx.lineWidth = 2;
+      HAND_CONNECTIONS.forEach(([a, b]) => {
+        if (landmarks[a] && landmarks[b]) {
+          ctx.beginPath();
+          // mirror for display (video is flipped)
+          ctx.moveTo((1 - landmarks[a].x) * canvas.width, landmarks[a].y * canvas.height);
+          ctx.lineTo((1 - landmarks[b].x) * canvas.width, landmarks[b].y * canvas.height);
+          ctx.stroke();
+        }
+      });
+
+      // Draw points
+      landmarks.forEach((lm, i) => {
+        const x = (1 - lm.x) * canvas.width;
+        const y = lm.y * canvas.height;
+        ctx.beginPath();
+        ctx.arc(x, y, i === 0 ? 5 : 3, 0, Math.PI * 2);
+        ctx.fillStyle = i === 0 ? '#fff' : color;
+        ctx.fill();
+      });
+    }
+
+    // ─────────────────────────────────────────────
+    //  HANDLE DETECT RESULT
+    // ─────────────────────────────────────────────
+    function handleDetectResult(data) {
+      const { gesture, confidence, landmarks } = data;
+
+      // Draw landmarks
+      const canvas = document.getElementById('landmarkCanvas');
+      const lmColor = gesture === 'gojo' ? '#00d4ff' : gesture === 'sukuna' ? '#ff3a3a' : '#ffffff';
+      drawLandmarks(canvas, landmarks, lmColor);
+
+      // Update confidence bar
+      const confPct = Math.round(confidence * 100);
+      const confBar = document.getElementById('confBar');
+      confBar.style.width = confPct + '%';
+      document.getElementById('confPct').textContent = confPct + '%';
+
+      if (gesture === 'gojo') {
+        confBar.style.background = 'linear-gradient(90deg, #0066aa, #00d4ff)';
+      } else if (gesture === 'sukuna') {
+        confBar.style.background = 'linear-gradient(90deg, #880000, #ff3a3a)';
+      } else {
+        confBar.style.background = 'linear-gradient(90deg, #444, #888)';
+      }
+
+      // Update info cards
+      const gestureEl = document.getElementById('currentGestureVal');
+      if (gesture === 'gojo') {
+        gestureEl.textContent = '☁ Gojo';
+        gestureEl.style.color = '#00d4ff';
+      } else if (gesture === 'sukuna') {
+        gestureEl.textContent = '🔥 Sukuna';
+        gestureEl.style.color = '#ff3a3a';
+      } else {
+        gestureEl.textContent = '—';
+        gestureEl.style.color = '#fff';
+      }
+
+      // HUD badge
+      const badge = document.getElementById('gestureBadge');
+      if (gesture !== 'none') {
+        badge.style.display = 'block';
+        badge.textContent = gesture === 'gojo' ? '☁ GOJO DETECTED' : '🔥 SUKUNA DETECTED';
+        badge.style.color = gesture === 'gojo' ? '#00d4ff' : '#ff3a3a';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      // Gesture hold logic
+      if (!revealCooldown) {
+        if (gesture !== 'none' && gesture === lastGesture) {
+          if (!gestureHoldStart) gestureHoldStart = Date.now();
+          const heldMs = Date.now() - gestureHoldStart;
+          if (heldMs >= CONFIRM_HOLD_MS) {
+            triggerReveal(gesture);
+            revealCooldown = true;
+            setTimeout(() => { revealCooldown = false; }, REVEAL_COOLDOWN_MS);
+            gestureHoldStart = null;
+            lastGesture = 'none';
+          }
+        } else {
+          lastGesture = gesture;
+          gestureHoldStart = gesture !== 'none' ? Date.now() : null;
+        }
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    //  REVEAL
+    // ─────────────────────────────────────────────
+    function triggerReveal(character) {
+      const overlay = document.getElementById('revealOverlay');
+      const revealBg = document.getElementById('revealBg');
+      const revealTitle = document.getElementById('revealTitle');
+      const revealSubtitle = document.getElementById('revealSubtitle');
+      const revealImg = document.getElementById('revealImg');
+
+      if (character === 'gojo') {
+        document.documentElement.style.setProperty('--reveal-color', '#00d4ff');
+        revealBg.style.background = 'radial-gradient(ellipse at center, #001a2e 0%, #000 70%)';
+        revealTitle.textContent = 'Unlimited Void';
+        revealTitle.style.color = '#00d4ff';
+        revealSubtitle.textContent = '無量空処 — Infinite Void Domain Expansion';
+        revealImg.src = 'gojo.png';
+        revealImg.style.borderColor = '#00d4ff';
+        revealImg.style.boxShadow = '0 0 60px #00d4ff, 0 0 120px #0066aa';
+
+        const audio = document.getElementById('gojoAudio');
+        audio.currentTime = 0;
+        audio.play().catch(() => { });
+
+      } else if (character === 'sukuna') {
+        document.documentElement.style.setProperty('--reveal-color', '#ff3a3a');
+        revealBg.style.background = 'radial-gradient(ellipse at center, #1a0000 0%, #000 70%)';
+        revealTitle.textContent = 'Malevolent Shrine';
+        revealTitle.style.color = '#ff3a3a';
+        revealSubtitle.textContent = '伏魔御廚子 — Malevolent Shrine Domain Expansion';
+        revealImg.src = 'sukuna.jpg';
+        revealImg.style.borderColor = '#ff3a3a';
+        revealImg.style.boxShadow = '0 0 60px #ff3a3a, 0 0 120px #880000';
+
+        const audio = document.getElementById('sukunaAudio');
+        audio.currentTime = 0;
+        audio.play().catch(() => { });
+      }
+
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReveal() {
+      document.getElementById('revealOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+      document.getElementById('gojoAudio').pause();
+      document.getElementById('sukunaAudio').pause();
+    }
+
+    // Close on bg click
+    document.getElementById('revealBg').addEventListener('click', closeReveal);
+
+    // ─────────────────────────────────────────────
+    //  TRAIN CAMERA
+    // ─────────────────────────────────────────────
+    async function startTrainCamera() {
+      if (trainStream) return;
+      try {
+        trainStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, facingMode: 'user' } });
+        const video = document.getElementById('trainVideo');
+        video.srcObject = trainStream;
+        await video.play();
+        connectCollectWs();
+      } catch (e) {
+        console.error('Train camera error:', e);
+      }
+    }
+
+    function stopTrainCamera() {
+      if (collectWs) { collectWs.close(); collectWs = null; }
+      if (trainStream) { trainStream.getTracks().forEach(t => t.stop()); trainStream = null; }
+    }
+
+    // ─────────────────────────────────────────────
+    //  COLLECT WEBSOCKET
+    // ─────────────────────────────────────────────
+    let collectInterval = null;
+    let isCollecting = false;
+    let collectingGesture = null;
+
+    function connectCollectWs() {
+      collectWs = new WebSocket(`${WS_BASE}/ws/collect`);
+      collectWs.onopen = () => startSendingTrainFrames();
+      collectWs.onmessage = (e) => handleCollectResult(JSON.parse(e.data));
+      collectWs.onerror = (e) => console.error('Collect WS error', e);
+    }
+
+    function startSendingTrainFrames() {
+      const video = document.getElementById('trainVideo');
+      const canvas = document.createElement('canvas');
+      canvas.width = 320; canvas.height = 240;
+      const ctx = canvas.getContext('2d');
+
+      collectInterval = setInterval(() => {
+        if (!collectWs || collectWs.readyState !== WebSocket.OPEN) return;
+        ctx.drawImage(video, 0, 0, 320, 240);
+        const b64 = canvas.toDataURL('image/jpeg', 0.6);
+        collectWs.send(JSON.stringify({
+          frame: b64,
+          gesture: collectingGesture || '',
+          collecting: isCollecting
+        }));
+      }, FRAME_INTERVAL_MS);
+    }
+
+    function handleCollectResult(data) {
+      if (data.status) return; // training/reset responses handled elsewhere
+
+      const { counts, landmarks, hand_detected } = data;
+
+      // Update counts
+      if (counts) {
+        const gc = counts.gojo || 0;
+        const sc = counts.sukuna || 0;
+        document.getElementById('gojoCount').innerHTML = `${gc} <span>samples</span>`;
+        document.getElementById('sukunaCount').innerHTML = `${sc} <span>samples</span>`;
+
+        // Enable train button if enough samples
+        document.getElementById('trainBtn').disabled = gc < 10 || sc < 10;
+      }
+
+      // Draw landmarks on train canvas
+      if (landmarks) {
+        const canvas = document.getElementById('trainCanvas');
+        const lmColor = collectingGesture === 'gojo' ? '#00d4ff' : collectingGesture === 'sukuna' ? '#ff3a3a' : '#ffffff';
+        drawLandmarks(canvas, landmarks, lmColor);
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    //  GESTURE COLLECTION TIMING
+    // ─────────────────────────────────────────────
+    function startCollect(gestureLabel) {
+      if (isCollecting) return;
+      isCollecting = true;
+      collectingGesture = gestureLabel;
+
+      const timerWrap = document.getElementById(`${gestureLabel}Timer`);
+      const timerBar = document.getElementById(`${gestureLabel}TimerBar`);
+      const timerLabel = document.getElementById(`${gestureLabel}TimerLabel`);
+      const btn = document.getElementById(`${gestureLabel}CollectBtn`);
+
+      btn.disabled = true;
+      btn.classList.add('active-collect');
+      timerWrap.classList.add('show');
+      timerBar.style.width = '100%';
+
+      const start = Date.now();
+      const tick = setInterval(() => {
+        const elapsed = Date.now() - start;
+        const pct = Math.max(0, 100 - (elapsed / COLLECT_DURATION_MS) * 100);
+        timerBar.style.width = pct + '%';
+        timerLabel.textContent = `Recording… ${((COLLECT_DURATION_MS - elapsed) / 1000).toFixed(1)}s`;
+
+        if (elapsed >= COLLECT_DURATION_MS) {
+          clearInterval(tick);
+          isCollecting = false;
+          collectingGesture = null;
+          btn.disabled = false;
+          btn.classList.remove('active-collect');
+          timerWrap.classList.remove('show');
+        }
+      }, 50);
+    }
+
+    // ─────────────────────────────────────────────
+    //  TRAIN MODEL
+    // ─────────────────────────────────────────────
+    function trainModel() {
+      if (!collectWs || collectWs.readyState !== WebSocket.OPEN) {
+        setTrainStatus('Server not connected. Start the backend first.', 'error');
+        return;
+      }
+      const btn = document.getElementById('trainBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Training…';
+      setTrainStatus('Training model on your gestures…', '');
+
+      collectWs.send(JSON.stringify({ action: 'train' }));
+
+      collectWs.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        if (data.status === 'trained') {
+          const acc = Math.round((data.accuracy || 0) * 100);
+          setTrainStatus(`✓ Model trained! Accuracy: ${acc}% — Switch to Detect tab to use it.`, 'success');
+          btn.textContent = '✓ Trained!';
+          checkModelStatus();
+        } else if (data.status === 'error') {
+          setTrainStatus('Error: ' + data.message, 'error');
+          btn.textContent = '⚡ Train Model';
+          btn.disabled = false;
+        } else {
+          handleCollectResult(data);
+        }
+      };
+    }
+
+    function resetData() {
+      if (!collectWs || collectWs.readyState !== WebSocket.OPEN) return;
+      collectWs.send(JSON.stringify({ action: 'reset' }));
+      document.getElementById('gojoCount').innerHTML = '0 <span>samples</span>';
+      document.getElementById('sukunaCount').innerHTML = '0 <span>samples</span>';
+      document.getElementById('trainBtn').disabled = true;
+      document.getElementById('trainBtn').textContent = '⚡ Train Model';
+      setTrainStatus('', '');
+
+      // Restore normal message handler
+      collectWs.onmessage = (e) => handleCollectResult(JSON.parse(e.data));
+    }
+
+    function setTrainStatus(msg, type) {
+      const el = document.getElementById('trainStatusMsg');
+      el.textContent = msg;
+      el.className = 'train-status-msg' + (type ? ' ' + type : '');
+    }
+
+    // ─────────────────────────────────────────────
+    //  BOOT
+    // ─────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      startDetectCamera();
+    });
+  </script>
 </body>
+
 </html>
